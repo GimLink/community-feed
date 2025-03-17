@@ -12,7 +12,7 @@ public class FakeCommentRepository implements CommentRepository {
 
 
     @Override
-    public Optional<Comment> findById(Long id) {
+    public Comment findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
@@ -24,7 +24,7 @@ public class FakeCommentRepository implements CommentRepository {
         }
 
         long id = store.size() + 1;
-        Comment newComment = new Comment(id, comment.getPost(), comment.getAuthor(), comment.getContent());
+        Comment newComment = Comment.createComment(comment.getPost(), comment.getAuthor(), comment.getContent());
         store.put(id, newComment);
         return newComment;
     }

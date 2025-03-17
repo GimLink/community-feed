@@ -12,6 +12,7 @@ public class PositiveIntegerCounter {
         this(0);
     }
 
+
     public void increase() {
         count++;
     }

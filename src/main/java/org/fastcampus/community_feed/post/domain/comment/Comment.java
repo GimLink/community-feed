@@ -1,21 +1,30 @@
 package org.fastcampus.community_feed.post.domain.comment;
 
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.domain.content.CommentContent;
 import org.fastcampus.community_feed.post.domain.content.Content;
 import org.fastcampus.community_feed.common.domain.PositiveIntegerCounter;
 import org.fastcampus.community_feed.user.domain.User;
 
+@Builder
+@AllArgsConstructor
+@Getter
 public class Comment {
   private final Long id;
   private final Post post;
   private final User author;
   private final Content content;
-  private final PositiveIntegerCounter positiveIntegerCounter;
+  private final PositiveIntegerCounter likeCount;
 
-  public Comment(Long id, Post post, User author, Content content,
-          PositiveIntegerCounter positiveIntegerCounter) {
+  public static Comment createComment(Post post, User author, String content) {
+    return new Comment(null, post, author, new CommentContent(content));
+  }
+
+  public Comment(Long id, Post post, User author, Content content) {
       if (post == null) {
       throw new IllegalArgumentException("post should not be null");
     }
@@ -30,15 +39,7 @@ public class Comment {
     this.post = post;
     this.author = author;
     this.content = content;
-    this.positiveIntegerCounter = positiveIntegerCounter;
-  }
-
-  public Comment(Long id, Post post, User author, Content content) {
-    this(id, post, author, content, new PositiveIntegerCounter());
-  }
-
-  public Comment(Long id, Post post, User author, String content) {
-   this(id, post, author, new CommentContent(content), new PositiveIntegerCounter());
+    this.likeCount = new PositiveIntegerCounter();
   }
 
   public void updateContent(User user, String content) {
@@ -52,32 +53,19 @@ public class Comment {
     if (author.equals(user)) {
       throw new IllegalArgumentException("author cannot like own comment");
     }
-    positiveIntegerCounter.increase();
+    likeCount.increase();
   }
 
   public void unlike() {
-    positiveIntegerCounter.decrease();
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public Post getPost() {
-    return post;
-  }
-
-  public User getAuthor() {
-    return author;
-  }
-
-  public Content getContent() {
-    return content;
+    likeCount.decrease();
   }
 
   public int getLikeCount() {
-    return positiveIntegerCounter.getCount();
+    return likeCount.getCount();
   }
+
+  public String getContent() {
+    return content.getContentText();}
 
   @Override
   public boolean equals(Object o) {

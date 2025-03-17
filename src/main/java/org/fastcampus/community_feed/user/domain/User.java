@@ -1,13 +1,25 @@
 package org.fastcampus.community_feed.user.domain;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.fastcampus.community_feed.common.domain.PositiveIntegerCounter;
 
+@Getter
+@Builder
+@AllArgsConstructor
 public class User {
-  private final Long id;
-  private final UserInfo userInfo;
-  private final PositiveIntegerCounter followingCount;
-  private final PositiveIntegerCounter followerCount;
+  private Long id;
+  private UserInfo userInfo;
+  private PositiveIntegerCounter followingCount;
+  private PositiveIntegerCounter followerCount;
 
   public User(Long id, UserInfo userInfo) {
     if (userInfo == null) {
@@ -53,6 +65,8 @@ public class User {
   public int getFollowerCount() {
     return followerCount.getCount();
   }
+  public String getName() {return userInfo.getName();}
+  public String getProfileImageUrl() {return userInfo.getProfileImageUrl();}
 
   public Long getId() {
     return id;

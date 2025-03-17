@@ -16,8 +16,8 @@ class CommentTest {
     private final User user = new User(1L, new UserInfo("name", "url"));
     private final User otherUser = new User(2L, new UserInfo("name", "url"));
 
-    private final Post post = new Post(1L, user, "content");
-    private final Comment comment = new Comment(1L, post, user, "comment content");
+    private final Post post = Post.createDefaultStatePost(1L, user, "content");
+    private final Comment comment = Comment.createComment( post, user, "comment content");
 
     @Test
     void givenCommentWhenLikeThenLikeCountShouldBe1() {
@@ -64,7 +64,7 @@ class CommentTest {
         comment.updateContent(user, newContent);
 
         // then
-        assertEquals(newContent, comment.getContent().getContentText());
+        assertEquals(newContent, comment.getContent());
     }
 
     @Test

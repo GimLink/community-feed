@@ -1,26 +1,30 @@
 package org.fastcampus.community_feed.user.application;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.fastcampus.community_feed.common.FakeObjectFactory;
 import org.fastcampus.community_feed.user.application.dto.CreateUserRequestDto;
 import org.fastcampus.community_feed.user.domain.User;
+import org.fastcampus.community_feed.user.domain.UserInfo;
+import org.fastcampus.community_feed.user.repository.FakeUserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class UserServiceTest {
+public class UserServiceTest {
 
-    private final UserService userService = FakeObjectFactory.getUserService();
+  private final UserService userService = FakeObjectFactory.getUserService();
 
-    @Test
-    void givenUserInfoDtoWhenCreateUserThenCanFindUser() {
-        // given
-        CreateUserRequestDto dto = new CreateUserRequestDto("John", "www.naver.com");
+  @Test
+  void givenUserInfoDto_whenCreateUser_thenFindUser() {
+    //given
+    CreateUserRequestDto dto = new CreateUserRequestDto("test", "");
 
-        // when
-        User savedUser = userService.createUser(dto);
+    //when
+    User savedUser = userService.createUser(dto);
 
-        // then
-        User foundUser = userService.getUser(savedUser.getId());
-        assertEquals(savedUser.getId(), foundUser.getId());
-    }
+    //then
+    User foundUser = userService.getUser(savedUser.getId());
+    UserInfo userInfo = foundUser.getUserInfo();
+    Assertions.assertEquals(savedUser.getId(), foundUser.getId());
+    Assertions.assertEquals("test", userInfo.getName());
+  }
+
 }

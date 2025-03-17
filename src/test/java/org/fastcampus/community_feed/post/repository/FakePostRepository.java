@@ -12,8 +12,8 @@ public class FakePostRepository implements PostRepository {
 
 
     @Override
-    public Optional<Post> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public Post findById(Long id) {
+        return store.get(id);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class FakePostRepository implements PostRepository {
         }
 
         long id = store.size() + 1;
-        Post newPost = new Post(id, post.getAuthor(), post.getContent());
+        Post newPost = Post.createDefaultStatePost(id, post.getAuthor(), post.getContent());
         store.put(id, newPost);
         return newPost;
     }

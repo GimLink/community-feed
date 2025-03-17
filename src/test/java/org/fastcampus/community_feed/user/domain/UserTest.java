@@ -1,14 +1,59 @@
 package org.fastcampus.community_feed.user.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
     private final UserInfo userInfo = new UserInfo("test", "");
-    private final User user1 = new User(1L, userInfo);;
-    private final User user2 = new User(2L, userInfo);
+    private User user1 = new User(1L, userInfo);
+    private User user2 = new User(2L, userInfo);
+
+
+    @BeforeEach
+    void init() {
+        user1 = new User(1L, userInfo);
+        user2 = new User(2L, userInfo);
+    }
+
+    @Test
+    void givenTwoUser_whenEqual_thenReturnFalse() {
+        boolean value = user1.equals(user2);
+
+        assertFalse(value);
+    }
+
+    @Test
+    void givenTwoSameIdUser_whenEqual_thenReturnTrue() {
+        User sameUser = new User(1L, userInfo);
+
+        boolean value = user1.equals(sameUser);
+
+        assertTrue(value);
+    }
+
+    @Test
+    void givenTwoUser_whenHashCode_thenReturnFalse() {
+        int hashCode1 = user1.hashCode();
+        int haschCode2 = user2.hashCode();
+
+        assertNotEquals(hashCode1, haschCode2);
+    }
+
+    @Test
+    void givenTwoSameIdUser_whenHashCode_thenEqual() {
+        User sameUser = new User(1L, userInfo);
+
+        int hashcode1 = user1.hashCode();
+        int sameHashCode = sameUser.hashCode();
+
+        assertEquals(hashcode1, sameHashCode);
+    }
 
     @Test
     void givenCreateSameIdUserWhenEqualSameIdThenReturnTrue() {

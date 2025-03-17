@@ -1,11 +1,18 @@
 package org.fastcampus.community_feed.post.domain;
 
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.fastcampus.community_feed.post.domain.content.Content;
 import org.fastcampus.community_feed.common.domain.PositiveIntegerCounter;
 import org.fastcampus.community_feed.post.domain.content.PostContent;
 import org.fastcampus.community_feed.user.domain.User;
 
+@Builder
+@AllArgsConstructor
+@Getter
 public class Post {
   private final Long id;
   private final User author;
@@ -13,7 +20,7 @@ public class Post {
   private PostPublicationState state;
   private final PositiveIntegerCounter likeCount;
 
-  public Post(Long id, User author, Content content, PostPublicationState state, PositiveIntegerCounter positiveIntegerCounter) {
+  public Post(Long id, User author, Content content, PostPublicationState state) {
     if (author == null) {
       throw new IllegalArgumentException("author should not be null");
     }
@@ -25,15 +32,19 @@ public class Post {
     this.author = author;
     this.content = content;
     this.state = state;
-    this.likeCount = positiveIntegerCounter;
+    this.likeCount = new PositiveIntegerCounter();
   }
 
   public Post(Long id, User author, Content content) {
     this(id, author, content, PostPublicationState.PUBLIC, new PositiveIntegerCounter());
   }
 
-  public Post(Long id, User author, String content) {
-    this(id, author, new PostContent(content), PostPublicationState.PUBLIC, new PositiveIntegerCounter());
+  public static Post createPost(Long id, User author, String content, PostPublicationState state) {
+    return new Post(id, author, new PostContent(content), state);
+  }
+
+  public static Post createDefaultStatePost(Long id, User author, String content) {
+    return new Post(id, author, new PostContent(content), PostPublicationState.PUBLIC);
   }
 
   public void updateContent(User user, String content) {
@@ -58,20 +69,8 @@ public class Post {
     this.state = state;
   }
 
-  public PostPublicationState getState() {
-    return state;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public User getAuthor() {
-    return author;
-  }
-
-  public Content getContent() {
-    return content;
+  public String getContent() {
+    return content.getContentText();
   }
 
   public int getLikeCount() {

@@ -8,9 +8,12 @@ import org.fastcampus.community_feed.post.application.interfaces.LikeRepository;
 import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.domain.comment.Comment;
 import org.fastcampus.community_feed.post.domain.content.CommentContent;
+import org.fastcampus.community_feed.post.domain.content.Content;
 import org.fastcampus.community_feed.user.application.UserService;
 import org.fastcampus.community_feed.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentService {
 
     private final UserService userService;
@@ -26,18 +29,18 @@ public class CommentService {
     }
 
     public Comment getComment(Long id) {
-        return commentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+        return commentRepository.findById(id);
     }
 
     public Comment createComment(CreateCommentRequestDto dto) {
         Post post = postService.getPost(dto.postId());
         User author = userService.getUser(dto.authorId());
-        Comment comment = new Comment(null, post, author, dto.content());
+        Comment comment = Comment.createComment(post, author, dto.content());
         return commentRepository.save(comment);
     }
 
-    public Comment updateComment(UpdateCommentRequestDto dto) {
-        Comment comment = getComment(dto.commentId());
+    public Comment updateComment(Long commentId, UpdateCommentRequestDto dto) {
+        Comment comment = getComment(commentId);
         User author = userService.getUser(dto.authorId());
         comment.updateContent(author, dto.content());
         return commentRepository.save(comment);

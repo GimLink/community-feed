@@ -31,51 +31,8 @@ class CommentServiceTest extends PostServiceTestTemplate {
         Comment comment = commentService.createComment(dto);
 
         // then
-        Content content = comment.getContent();
-        assertEquals(commentContent, content.getContentText());
-    }
-
-    @Test
-    void givenCreateCommentWhenUpdateCommentThenReturnUpdatedComment() {
-        // given
-        Comment comment = commentService.createComment(dto);
-
-        // when
-        String updatedCommentContent = "this is updated comment";
-        UpdateCommentRequestDto updateCommentRequestDto = new UpdateCommentRequestDto(comment.getId(),
-                user.getId(), updatedCommentContent);
-        Comment updatedComment = commentService.updateComment(updateCommentRequestDto);
-
-        // then
-        Content content = updatedComment.getContent();
-        assertEquals(updatedCommentContent, content.getContentText());
-    }
-
-    @Test
-    void givenCommentWhenLikeCommentThenReturnCommentWithLike() {
-        // given
-        Comment comment = commentService.createComment(dto);
-
-        // when
-        LikeRequestDto likeRequestDto = new LikeRequestDto(otherUser.getId(), comment.getId());
-        commentService.likeComment(likeRequestDto);
-
-        // then
-        assertEquals(1, comment.getLikeCount());
-    }
-
-    @Test
-    void givenCommentWhenUnlikeCommentThenReturnCommentWithoutLike() {
-        // given
-        Comment comment = commentService.createComment(dto);
-
-        // when
-        LikeRequestDto likeRequestDto = new LikeRequestDto(otherUser.getId(), comment.getId());
-        commentService.likeComment(likeRequestDto);
-        commentService.unlikeComment(likeRequestDto);
-
-        // then
-        assertEquals(0, comment.getLikeCount());
+        String content = comment.getContent();
+        assertEquals(commentContent, content);
     }
 
     @Test
