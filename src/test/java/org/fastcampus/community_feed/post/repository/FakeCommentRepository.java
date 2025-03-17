@@ -13,7 +13,7 @@ public class FakeCommentRepository implements CommentRepository {
 
     @Override
     public Comment findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+        return store.get(id);
     }
 
     @Override
