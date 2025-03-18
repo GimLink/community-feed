@@ -26,7 +26,7 @@ public class UserEntity extends TimeBaseEntity {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private String profileImageUrl;
+  private String profileImage;
   private int followingCount;
   private int followerCount;
 
@@ -35,7 +35,7 @@ public class UserEntity extends TimeBaseEntity {
 
     this.id = user.getId();
     this.name = user.getName();
-    this.profileImageUrl = user.getProfileImageUrl();
+    this.profileImage = user.getProfileImage();
     this.followingCount = user.getFollowingCount();
     this.followerCount = user.getFollowerCount();
   }
@@ -43,7 +43,7 @@ public class UserEntity extends TimeBaseEntity {
   public User toUser() {
     return User.builder()
         .id(id)
-        .userInfo(new UserInfo(name, profileImageUrl))
+        .userInfo(new UserInfo(name, profileImage))
         .followerCount(new PositiveIntegerCounter(followerCount))
         .followingCount(new PositiveIntegerCounter(followingCount))
         .build();

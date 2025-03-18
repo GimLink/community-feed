@@ -66,7 +66,7 @@ public class User {
     return followerCount.getCount();
   }
   public String getName() {return userInfo.getName();}
-  public String getProfileImageUrl() {return userInfo.getProfileImageUrl();}
+  public String getProfileImage() {return userInfo.getProfileImage();}
 
   public Long getId() {
     return id;

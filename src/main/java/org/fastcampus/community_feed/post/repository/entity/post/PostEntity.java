@@ -1,5 +1,6 @@
 package org.fastcampus.community_feed.post.repository.entity.post;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -19,6 +20,7 @@ import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.domain.PostPublicationState;
 import org.fastcampus.community_feed.post.domain.content.PostContent;
 import org.fastcampus.community_feed.user.repository.entity.UserEntity;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name="community_post")
@@ -40,6 +42,9 @@ public class PostEntity extends TimeBaseEntity {
   @Convert(converter = PostPublicationStateConverter.class)
   private PostPublicationState state;
   private Integer likeCount;
+
+  @ColumnDefault("0")
+  private int commentCount;
 
   public PostEntity(Post post) {
     this.id = post.getId();

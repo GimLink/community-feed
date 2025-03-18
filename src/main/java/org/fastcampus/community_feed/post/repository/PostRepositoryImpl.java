@@ -6,6 +6,7 @@ import org.fastcampus.community_feed.post.application.interfaces.PostRepository;
 import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.repository.entity.post.PostEntity;
 import org.fastcampus.community_feed.post.repository.jpa.JpaPostRepository;
+import org.fastcampus.community_feed.post.repository.post_queue.UserPostQueueCommandRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class PostRepositoryImpl implements PostRepository {
 
   private final JpaPostRepository jpaPostRepository;
+  private final UserPostQueueCommandRepository commandRepository;
 
   @Override
   public Post findById(Long id) {
@@ -32,6 +34,7 @@ public class PostRepositoryImpl implements PostRepository {
 
     }
     postEntity = jpaPostRepository.save(postEntity);
+    commandRepository.publishPost(postEntity);
     return postEntity.toPost();
   }
 }
