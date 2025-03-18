@@ -69,5 +69,4 @@ public class UserPostQueueQueryRepositoryImpl implements UserPostQueueQueryRepos
         .and(likeEntity.id.targetType.eq("POST"))
         .and(likeEntity.id.userId.eq(userId));
   }
-
 }
