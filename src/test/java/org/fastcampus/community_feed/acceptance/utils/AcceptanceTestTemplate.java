@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class AcceptanceTestTemplate {
 
   @Autowired
-  private DatabseCleanUp cleanUp;
+  private DatabaseCleanUp cleanUp;
 
   @Autowired
   private DataLoader dataLoader;
