@@ -12,7 +12,7 @@ public class SignUpAcceptanceSteps {
         .body(dto)
         .contentType(MediaType.APPLICATION_JSON_VALUE)
         .when()
-        .post("/signup/send-veritification-email")
+        .post("/signup/send-verification-email")
         .then()
         .extract()
         .jsonPath().get("code");

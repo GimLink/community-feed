@@ -3,9 +3,9 @@ package org.fastcampus.community_feed.common.ui;
 import lombok.extern.slf4j.Slf4j;
 import org.fastcampus.community_feed.common.domain.exception.ErrorCode;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestController
+@RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
