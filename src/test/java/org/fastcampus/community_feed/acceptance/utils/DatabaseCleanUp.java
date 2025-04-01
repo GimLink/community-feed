@@ -31,7 +31,7 @@ public class DatabaseCleanUp implements InitializingBean {
         .map(entity -> entity.getJavaType().getAnnotation(Table.class).name())
         .collect(Collectors.toList());
 
-    generatedIdTable = new HashSet<>(List.of("community_like", "community_user_relation"));
+    generatedIdTable = new HashSet<>(List.of("community_like", "community_user_relation", "community_user_auth"));
   }
 
   @Transactional

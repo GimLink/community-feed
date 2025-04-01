@@ -31,4 +31,11 @@ public class AcceptanceTestTemplate {
     cleanUp.execute();
   }
 
+  protected boolean isEmailVerified(String email) {
+    return dataLoader.isEmailVerified(email);
+  }
+
+  protected Long getUserId(String email) {
+    return dataLoader.getUserId(email);
+  }
 }

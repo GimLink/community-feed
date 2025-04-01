@@ -23,4 +23,9 @@ public class EmailService {
     emailVerificationRepository.createEmailVerification(email, token);
   }
 
+  public void verifyEmail(String email, String token) {
+    Email emailValue = Email.createEmail(email);
+    emailVerificationRepository.verifyEmail(emailValue, token);
+  }
+
 }
