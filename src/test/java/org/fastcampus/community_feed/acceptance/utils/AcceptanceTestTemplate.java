@@ -38,4 +38,8 @@ public class AcceptanceTestTemplate {
   protected Long getUserId(String email) {
     return dataLoader.getUserId(email);
   }
+
+  protected void createUser(String email) {
+    dataLoader.createUser(email);
+  }
 }
