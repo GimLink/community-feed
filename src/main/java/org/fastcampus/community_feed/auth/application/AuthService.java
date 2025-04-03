@@ -2,9 +2,12 @@ package org.fastcampus.community_feed.auth.application;
 
 import lombok.RequiredArgsConstructor;
 import org.fastcampus.community_feed.auth.application.dto.CreateUserAuthRequestDto;
+import org.fastcampus.community_feed.auth.application.dto.LoginRequestDto;
+import org.fastcampus.community_feed.auth.application.dto.UserAccessTokenResponseDto;
 import org.fastcampus.community_feed.auth.application.interfaces.EmailVerificationRepository;
 import org.fastcampus.community_feed.auth.application.interfaces.UserAuthRepository;
 import org.fastcampus.community_feed.auth.domain.Email;
+import org.fastcampus.community_feed.auth.domain.TokenProvider;
 import org.fastcampus.community_feed.auth.domain.UserAuth;
 import org.fastcampus.community_feed.auth.repository.entity.EmailVerificationEntity;
 import org.fastcampus.community_feed.user.domain.User;
@@ -16,6 +19,7 @@ public class AuthService {
 
   private final UserAuthRepository userAuthRepository;
   private final EmailVerificationRepository emailVerificationRepository;
+  private final TokenProvider tokenProvider;
 
   public Long registerUser(CreateUserAuthRequestDto dto) {
     Email email = Email.createEmail(dto.email());
@@ -29,6 +33,14 @@ public class AuthService {
     userAuth = userAuthRepository.registerUser(userAuth, user);
 
     return userAuth.getUserId();
+
+  }
+
+  public UserAccessTokenResponseDto login(LoginRequestDto dto) {
+    UserAuth userAuth = userAuthRepository.loginUser(dto.email(), dto.password());
+    String token = tokenProvider.createToken(userAuth.getUserId(), userAuth.getUserRole());
+
+    return new UserAccessTokenResponseDto(token);
 
   }
 

@@ -56,7 +56,7 @@ public class DataLoader {
     requestSendEmail(new SendEmailRequestDto(email));
     String token = getEmailToken(email);
     requestVerifyEmail(email, token);
-    registerUser(new CreateUserAuthRequestDto(email, "passwod", "USER", "name", ""));
+    registerUser(new CreateUserAuthRequestDto(email, "password", "USER", "name", ""));
   }
 
 }
