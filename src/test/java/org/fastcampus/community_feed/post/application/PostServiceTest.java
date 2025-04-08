@@ -2,16 +2,11 @@ package org.fastcampus.community_feed.post.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.fastcampus.community_feed.common.FakeObjectFactory;
 import org.fastcampus.community_feed.post.application.dto.CreatePostRequestDto;
 import org.fastcampus.community_feed.post.application.dto.LikeRequestDto;
 import org.fastcampus.community_feed.post.application.dto.UpdatePostRequestDto;
 import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.domain.PostPublicationState;
-import org.fastcampus.community_feed.post.domain.content.Content;
-import org.fastcampus.community_feed.user.application.UserService;
-import org.fastcampus.community_feed.user.application.dto.CreateUserRequestDto;
-import org.fastcampus.community_feed.user.domain.User;
 import org.junit.jupiter.api.Test;
 
 class PostServiceTest extends PostServiceTestTemplate {

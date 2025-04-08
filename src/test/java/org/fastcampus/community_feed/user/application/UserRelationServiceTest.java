@@ -2,14 +2,10 @@ package org.fastcampus.community_feed.user.application;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.fastcampus.community_feed.common.FakeObjectFactory;
+import org.fastcampus.community_feed.fake.FakeObjectFactory;
 import org.fastcampus.community_feed.user.application.dto.CreateUserRequestDto;
 import org.fastcampus.community_feed.user.application.dto.FollowUserRequestDto;
-import org.fastcampus.community_feed.user.application.interfaces.UserRelationRepository;
-import org.fastcampus.community_feed.user.application.interfaces.UserRepository;
 import org.fastcampus.community_feed.user.domain.User;
-import org.fastcampus.community_feed.user.repository.FakeUserRelationRepository;
-import org.fastcampus.community_feed.user.repository.FakeUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package org.fastcampus.community_feed.post.application;
 
-import org.fastcampus.community_feed.common.FakeObjectFactory;
+import org.fastcampus.community_feed.fake.FakeObjectFactory;
 import org.fastcampus.community_feed.post.application.dto.CreatePostRequestDto;
 import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.domain.PostPublicationState;

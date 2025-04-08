@@ -1,4 +1,4 @@
-package org.fastcampus.community_feed.common;
+package org.fastcampus.community_feed.fake;
 
 import org.fastcampus.community_feed.post.application.CommentService;
 import org.fastcampus.community_feed.post.application.PostService;

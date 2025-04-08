@@ -1,10 +1,9 @@
 package org.fastcampus.community_feed.user.application;
 
-import org.fastcampus.community_feed.common.FakeObjectFactory;
+import org.fastcampus.community_feed.fake.FakeObjectFactory;
 import org.fastcampus.community_feed.user.application.dto.CreateUserRequestDto;
 import org.fastcampus.community_feed.user.domain.User;
 import org.fastcampus.community_feed.user.domain.UserInfo;
-import org.fastcampus.community_feed.user.repository.FakeUserRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
