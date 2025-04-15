@@ -43,6 +43,9 @@ dependencies {
     //lombok
     implementation("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+
+    //fcm
+    implementation("com.google.firebase:firebase-admin:9.3.0")
 }
 
 tasks.test {

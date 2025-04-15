@@ -47,6 +47,6 @@ public class AcceptanceTestTemplate {
   }
 
   protected String login(String email) {
-    return requestLoginToken(new LoginRequestDto(email, "password"));
+    return requestLoginToken(new LoginRequestDto(email, "password", "token"));
   }
 }

@@ -16,3 +16,6 @@ spring:
     open-in-view: false
 
 secret-key : "thisisacretekeythisisacretekeythisisacretekeythisisacretekeythisisacretekeythisisacretekey"
+
+fcm:
+  certification: adminsdk.json
