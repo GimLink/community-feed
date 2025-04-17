@@ -3,6 +3,7 @@ package org.fastcampus.community_feed.post.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
+import org.fastcampus.community_feed.message.application.interfaces.MessageRepository;
 import org.fastcampus.community_feed.post.application.interfaces.LikeRepository;
 import org.fastcampus.community_feed.post.domain.Post;
 import org.fastcampus.community_feed.post.domain.comment.Comment;
@@ -27,6 +28,7 @@ public class LikeRepositoryImpl implements LikeRepository {
   private final JpaPostRepository jpaPostRepository;
   private final JpaLikeRepository jpaLikeRepository;
   private final JpaCommentRepository jpaCommentRepository;
+  private final MessageRepository messageRepository;
 
   @Override
   public boolean checkLike(Post post, User user) {
@@ -46,6 +48,7 @@ public class LikeRepositoryImpl implements LikeRepository {
     LikeEntity likeEntity = new LikeEntity(post, user);
     entityManager.persist(likeEntity);
     jpaPostRepository.updateLikeCount(post.getId(), 1);
+    messageRepository.sendLikeMessage(user, post.getAuthor());
   }
 
   @Override
